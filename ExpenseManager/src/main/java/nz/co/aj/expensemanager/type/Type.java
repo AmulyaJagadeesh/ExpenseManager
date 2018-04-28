@@ -24,6 +24,18 @@ import nz.co.aj.expensemanager.subType.SubType;
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="idtype")
 public class Type {
 	
+	public Type() {
+		super();
+	}
+	
+	public Type(Long idtype, String name, String description, Date createdTime) {
+		super();
+		this.idtype = idtype;
+		this.name = name;
+		this.description = description;
+		this.createdTime = createdTime;
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="idtype")

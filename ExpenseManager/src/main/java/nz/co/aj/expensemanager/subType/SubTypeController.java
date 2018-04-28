@@ -23,7 +23,7 @@ public class SubTypeController {
 		return subTypeService.getAllSubTypes();
 	}
 	
-	@RequestMapping( method=RequestMethod.POST, value="/addsubtype")
+	@RequestMapping( method=RequestMethod.POST, value="/add")
 	public void addSubType( @RequestBody SubType subType )
 	{
 		subTypeService.addSubType(subType);

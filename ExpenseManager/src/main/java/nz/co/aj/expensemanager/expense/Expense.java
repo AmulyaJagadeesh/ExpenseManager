@@ -16,13 +16,9 @@ import nz.co.aj.expensemanager.subType.SubType;
 import nz.co.aj.expensemanager.type.Type;
 import nz.co.aj.expensemanager.user.User;
 
-/**
-*
-*/
 @Entity
 @Table(name="expense")
-public class Expense {        
-
+public class Expense {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

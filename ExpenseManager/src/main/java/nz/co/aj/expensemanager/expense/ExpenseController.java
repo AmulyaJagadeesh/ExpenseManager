@@ -9,34 +9,44 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping(value="/expenses")
+@Api(value="expense", description="Operations pertaining to expenses in Expense Manager")
 public class ExpenseController {
 	
 	@Autowired
 	ExpenseService expenseService;
 	
-	@RequestMapping(value="/allexpenses")
+	@RequestMapping( method=RequestMethod.GET, value="/allexpenses")
 	public List<Expense> getAllExpenses() {
 		return expenseService.getAllExpenses();
 	}
 	
-	@RequestMapping(value="/user/{userId}")
+	@ApiOperation(value = "Returns the expenses for a particular user ID")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "OK") 
+			})
+	@RequestMapping( method=RequestMethod.GET,value="/user/{userId}")
 	public List<Expense> getExpensesByUserId( @PathVariable Long userId ) {
 		return expenseService.getExpensesByUserId(userId);
 	}
 	
-	@RequestMapping(value="/type/{typeId}")
+	@RequestMapping( method=RequestMethod.GET, value="/type/{typeId}")
 	public List<Expense> getExpensesByTypeId( @PathVariable Long typeId ) {
 		return expenseService.getExpensesByTypeId(typeId);
 	}
 	
-	@RequestMapping( method = RequestMethod.POST, value="/addExpense")
+	@RequestMapping( method = RequestMethod.POST, value="/add")
 	public void addExpense( @RequestBody Expense expense ) {
 		expenseService.addExpense(expense);
 	}
 	
-	@RequestMapping( value="/deleteExpense/{id}" )
+	@RequestMapping(  method=RequestMethod.DELETE, value="/delete/{id}" )
 	public void deleteExpense( @PathVariable Long id )
 	{
 		expenseService.deleteExpense(id);

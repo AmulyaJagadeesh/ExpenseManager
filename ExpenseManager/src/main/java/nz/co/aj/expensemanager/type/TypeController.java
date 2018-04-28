@@ -22,7 +22,7 @@ public class TypeController {
 		return typeService.getType(id);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST, value="/addtype")
+	@RequestMapping(method=RequestMethod.POST, value="/add")
 	public void addType(@RequestBody Type type ) {
 		typeService.addType(type);
 	}
@@ -34,7 +34,7 @@ public class TypeController {
 		
 	}
 	
-	@RequestMapping(value="/deletetype/{id}")
+	@RequestMapping(value="/delete/{id}")
 	public void deleteType( @PathVariable Long id ) {
 		typeService.deleteTypeById(id);
 	}
