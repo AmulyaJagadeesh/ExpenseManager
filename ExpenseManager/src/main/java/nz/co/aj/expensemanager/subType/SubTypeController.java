@@ -17,26 +17,27 @@ public class SubTypeController {
 	SubTypeService subTypeService;
 	
 	
-	@RequestMapping("/allsubtypes")
-	public List<SubType> getAllSubTypes()
+	@RequestMapping("/")
+	public List<SubTypeDTO> getAllSubTypes()
 	{
 		return subTypeService.getAllSubTypes();
 	}
 	
 	@RequestMapping( method=RequestMethod.POST, value="/add")
-	public void addSubType( @RequestBody SubType subType )
+	public void addSubType( @RequestBody SubTypeDTO subType )
 	{
 		subTypeService.addSubType(subType);
 	}
 	
 	@RequestMapping( "/{subTypeId}" )
-	public SubType getSubTypeById( @PathVariable Long subTypeId )
+	public SubTypeDTO getSubTypeById( @PathVariable Long subTypeId )
 	{
 		return subTypeService.getSubTypeById(subTypeId);
 	}
 	
 	@RequestMapping("/delete/{id}")
-	public void deleteSubType( @PathVariable Long id ) {
+	public void deleteSubType( @PathVariable Long id )
+	{
 		subTypeService.deleteById(id);
 	}
 

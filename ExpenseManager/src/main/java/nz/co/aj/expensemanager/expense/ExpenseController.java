@@ -22,9 +22,17 @@ public class ExpenseController {
 	@Autowired
 	ExpenseService expenseService;
 	
-	@RequestMapping( method=RequestMethod.GET, value="/allexpenses")
-	public List<Expense> getAllExpenses() {
+	@RequestMapping( method=RequestMethod.GET, value="/")
+	public List<ExpenseDTO> getAllExpenses()
+	{
 		return expenseService.getAllExpenses();
+	}
+
+	@ApiOperation(value = "Returns the expense for a particular expense ID")
+	@RequestMapping( method=RequestMethod.GET,value="/{expenseId}")
+	public ExpenseDTO getExpense( @PathVariable Long expenseId )
+	{
+		return expenseService.getById(expenseId);
 	}
 	
 	@ApiOperation(value = "Returns the expenses for a particular user ID")
@@ -32,23 +40,28 @@ public class ExpenseController {
 			@ApiResponse(code = 200, message = "OK") 
 			})
 	@RequestMapping( method=RequestMethod.GET,value="/user/{userId}")
-	public List<Expense> getExpensesByUserId( @PathVariable Long userId ) {
+	public List<ExpenseDTO> getExpensesByUserId( @PathVariable Long userId )
+	{
 		return expenseService.getExpensesByUserId(userId);
 	}
 	
 	@RequestMapping( method=RequestMethod.GET, value="/type/{typeId}")
-	public List<Expense> getExpensesByTypeId( @PathVariable Long typeId ) {
+	public List<ExpenseDTO> getExpensesByTypeId( @PathVariable Long typeId )
+	{
 		return expenseService.getExpensesByTypeId(typeId);
 	}
 	
 	@RequestMapping( method = RequestMethod.POST, value="/add")
-	public void addExpense( @RequestBody Expense expense ) {
+	public void addExpense( @RequestBody ExpenseDTO expense )
+	{
+
 		expenseService.addExpense(expense);
 	}
 	
 	@RequestMapping(  method=RequestMethod.DELETE, value="/delete/{id}" )
 	public void deleteExpense( @PathVariable Long id )
 	{
+
 		expenseService.deleteExpense(id);
 	}
 

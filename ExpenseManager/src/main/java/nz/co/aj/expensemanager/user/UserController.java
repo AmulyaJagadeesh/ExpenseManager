@@ -24,22 +24,24 @@ public class UserController {
 //		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 //	}
 
-	@RequestMapping( method=RequestMethod.POST, value="/adduser" )
-	public void createUser( @RequestBody User user )
+	@RequestMapping( method=RequestMethod.POST, value="/add" )
+	public void createUser( @RequestBody UserDTO user )
 	{
 		//user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		userService.createUser(user);
 	}
 	
-	@RequestMapping( value="/allusers" )
-	public List<User> findAllUsers( )
+	@RequestMapping( value="/" )
+	public List<UserDTO> findAllUsers( )
 	{
+
 		return userService.findAllUsers();
 	}
 	
 	@RequestMapping( value="/{userId}" )
-	public User findUser( @PathVariable Long userId )
+	public UserDTO findUser( @PathVariable Long userId )
 	{
+
 		return userService.findById(userId);
 	}
 	

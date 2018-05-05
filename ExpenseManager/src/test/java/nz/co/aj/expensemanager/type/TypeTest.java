@@ -25,8 +25,8 @@ public class TypeTest {
 	public void testAllTypes()
 	{
 		when(typeService.getAllTypes()).thenReturn(Arrays.asList(
-				new Type(1L, "Grocery", "bdsh", new Date() ),
-				new Type(2L, "ads", "bddffds fsh", new Date() )
+				new TypeDTO(1L, "Grocery", "bdsh" ),
+				new TypeDTO(2L, "ads", "bddffds fsh")
 				) );
 		Assert.assertTrue(controller.getAllTypes().size() == 2);
 		

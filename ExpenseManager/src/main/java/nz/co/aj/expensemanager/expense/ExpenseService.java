@@ -1,9 +1,11 @@
 package nz.co.aj.expensemanager.expense;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,36 +14,51 @@ public class ExpenseService {
 	
 	@Autowired
 	ExpenseRepository expenseRepository;
+
+	@Autowired
+	ModelMapper mapper;
 	
-	public List<Expense> getAllExpenses()
+	public List<ExpenseDTO> getAllExpenses()
 	{
-		List<Expense> expenses = new ArrayList<>();
-		expenseRepository.findAll().forEach(expenses::add);
+		List<ExpenseDTO> expenses = new ArrayList<>();
+		Iterator<Expense> iterator = expenseRepository.findAll().iterator();
+		while( iterator.hasNext() )
+		{
+			expenses.add(convertToDto(iterator.next()));
+		}
 		return expenses;
 	}
 	
-	public Expense getById( Long id )
+	public ExpenseDTO getById( Long id )
 	{
 		Optional<Expense> expenseOptional = expenseRepository.findById(id);
 		if( expenseOptional.isPresent() )
 		{
-			return expenseOptional.get();
+			return convertToDto(expenseOptional.get());
 		}
 		return null;
 	}
 	
-	public List<Expense> getExpensesByUserId(Long userId)
+	public List<ExpenseDTO> getExpensesByUserId(Long userId)
 	{
-		List<Expense> expenses = new ArrayList<>();
-		expenseRepository.findByUserIduser(userId).forEach(expenses::add);
+		List<ExpenseDTO> expenses = new ArrayList<>();
+		Iterator<Expense> iterator = expenseRepository.findByUserIduser(userId).iterator();
+		while( iterator.hasNext() )
+		{
+			expenses.add(convertToDto(iterator.next()));
+		}
 		return expenses;
 	}
 
 	
-	public List<Expense> getExpensesByTypeId(Long typeId)
+	public List<ExpenseDTO> getExpensesByTypeId(Long typeId)
 	{
-		List<Expense> expenses = new ArrayList<>();
-		expenseRepository.findByTypeIdtype(typeId).forEach(expenses::add);
+		List<ExpenseDTO> expenses = new ArrayList<>();
+		Iterator<Expense> iterator = expenseRepository.findByTypeIdtype(typeId).iterator();
+		while( iterator.hasNext() )
+		{
+			expenses.add(convertToDto(iterator.next()));
+		}
 		return expenses;
 	}
 	
@@ -50,9 +67,21 @@ public class ExpenseService {
 		expenseRepository.deleteById(id);
 	}
 	
-	public void addExpense( Expense expense )
+	public void addExpense( ExpenseDTO expense )
 	{
-		expenseRepository.save(expense);
+		expenseRepository.save(convertToEntity(expense));
+	}
+
+	private ExpenseDTO convertToDto( Expense expense )
+	{
+		ExpenseDTO expenseDTO = mapper.map(expense, ExpenseDTO.class );
+		return expenseDTO;
+	}
+
+	private Expense convertToEntity( ExpenseDTO expenseDTO )
+	{
+		Expense expense = mapper.map(expenseDTO, Expense.class );
+		return expense;
 	}
 
 }

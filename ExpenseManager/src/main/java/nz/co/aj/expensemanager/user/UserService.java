@@ -1,9 +1,11 @@
 package nz.co.aj.expensemanager.user;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.core.userdetails.UserDetails;
 //import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,31 +17,36 @@ public class UserService
 //implements UserDetailsService 
 
 {
+	@Autowired
+	ModelMapper mapper;
 	
 	@Autowired
 	UserRepository userRepository;
 	
-	public List<User> findAllUsers()
+	public List<UserDTO> findAllUsers()
 	{
-		List<User> users = new ArrayList<>();
-		userRepository.findAll().forEach( users::add );
+		List<UserDTO> users = new ArrayList<>();
+		Iterator<User> iterator = userRepository.findAll().iterator();
+		while( iterator.hasNext() )
+		{
+			users.add(convertToDto(iterator.next()));
+		}
 		return users;
 	}
 	
-	public void createUser( User user )
+	public void createUser( UserDTO user )
 	{
-		userRepository.save(user);
+		userRepository.save(convertToEntity(user));
 	}
 
-	public User findById( Long userId )
+	public UserDTO findById( Long userId )
 	{
-		User user = null;
 		Optional<User> userOptional = userRepository.findById(userId);
 		if( userOptional.isPresent() )
 		{
-			user = userOptional.get();
+			return convertToDto(userOptional.get());
 		}
-		return user;
+		return null;
 	}
 
 //	@Override
@@ -47,6 +54,17 @@ public class UserService
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
-	
+
+	private UserDTO convertToDto( User user )
+	{
+		UserDTO userDTO = mapper.map(user, UserDTO.class );
+		return userDTO;
+	}
+
+	private User convertToEntity( UserDTO userDTO )
+	{
+		User user = mapper.map(userDTO, User.class );
+		return user;
+	}
 
 }
