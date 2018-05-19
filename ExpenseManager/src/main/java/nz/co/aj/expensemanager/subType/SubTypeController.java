@@ -2,6 +2,7 @@ package nz.co.aj.expensemanager.subType;
 
 import java.util.List;
 
+import nz.co.aj.expensemanager.controller.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/subtypes")
-public class SubTypeController {
+public class SubTypeController extends Controller {
 	
 	@Autowired
 	SubTypeService subTypeService;

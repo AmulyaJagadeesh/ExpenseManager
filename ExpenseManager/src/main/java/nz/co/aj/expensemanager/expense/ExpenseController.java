@@ -2,6 +2,7 @@ package nz.co.aj.expensemanager.expense;
 
 import java.util.List;
 
+import nz.co.aj.expensemanager.controller.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,7 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 @RequestMapping(value="/expenses")
 @Api(value="expense", description="Operations pertaining to expenses in Expense Manager")
-public class ExpenseController {
+public class ExpenseController extends Controller {
 	
 	@Autowired
 	ExpenseService expenseService;

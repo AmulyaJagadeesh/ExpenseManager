@@ -2,17 +2,14 @@ package nz.co.aj.expensemanager.type;
 
 import java.util.List;
 
+import nz.co.aj.expensemanager.controller.Controller;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController
 @RequestMapping("/types")
-public class TypeController {
+@RestController
+public class TypeController extends Controller {
 	
 	@Autowired
 	TypeService typeService;
