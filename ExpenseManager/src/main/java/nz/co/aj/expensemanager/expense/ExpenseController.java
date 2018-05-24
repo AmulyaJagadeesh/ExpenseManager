@@ -4,11 +4,7 @@ import java.util.List;
 
 import nz.co.aj.expensemanager.controller.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -40,7 +36,7 @@ public class ExpenseController extends Controller {
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "OK") 
 			})
-	@RequestMapping( method=RequestMethod.GET,value="/user/{userId}")
+	@GetMapping( value="/user/{userId}")
 	public List<ExpenseDTO> getExpensesByUserId( @PathVariable Long userId )
 	{
 		return expenseService.getExpensesByUserId(userId);

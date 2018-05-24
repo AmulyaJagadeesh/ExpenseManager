@@ -16,7 +16,18 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Table(name="USER")
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="iduser")
 public class User {
-	
+	public User( User user ) {
+		this.name = user.name;
+		this.email = user.email;
+		this.password = user.password;
+		this.iduser = user.getIduser();
+	}
+
+	public User()
+	{
+		super();
+	}
+
 	@Column(name ="iduser")
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

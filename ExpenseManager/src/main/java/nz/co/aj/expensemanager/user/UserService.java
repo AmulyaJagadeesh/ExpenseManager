@@ -10,19 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.core.userdetails.UserDetails;
 //import org.springframework.security.core.userdetails.UserDetailsService;
 //import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService 
-//implements UserDetailsService 
-
 {
 	@Autowired
 	ModelMapper mapper;
 	
 	@Autowired
 	UserRepository userRepository;
-	
+
 	public List<UserDTO> findAllUsers()
 	{
 		List<UserDTO> users = new ArrayList<>();
@@ -49,11 +48,15 @@ public class UserService
 		return null;
 	}
 
-//	@Override
-//	public UserDetails loadUserByUsername(String arg0) throws UsernameNotFoundException {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	public UserDTO login( UserDTO user )
+	{
+		User userLoggedIn = userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword());
+		if( userLoggedIn != null )
+		{
+			return convertToDto(userLoggedIn);
+		}
+		return null;
+	}
 
 	private UserDTO convertToDto( User user )
 	{

@@ -14,7 +14,7 @@ public class TypeController extends Controller {
 	@Autowired
 	TypeService typeService;
 
-	@RequestMapping(value="/{id}")
+	@GetMapping(value="/{id}")
 	public TypeDTO getType( @PathVariable("id") Long id )
 	{
         return typeService.getType(id);
@@ -26,7 +26,7 @@ public class TypeController extends Controller {
 		typeService.addType(type);
 	}
 	
-	@RequestMapping(value="/")
+	@GetMapping(value="/")
 	public List<TypeDTO> getAllTypes()
 	{
 		List<TypeDTO> types = typeService.getAllTypes();
