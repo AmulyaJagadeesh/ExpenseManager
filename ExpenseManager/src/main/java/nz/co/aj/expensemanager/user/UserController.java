@@ -22,7 +22,7 @@ public class UserController {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		userService.createUser(user);
 	}
-	
+
 	@GetMapping( value="/users" )
 	public List<UserDTO> findAllUsers( )
 	{

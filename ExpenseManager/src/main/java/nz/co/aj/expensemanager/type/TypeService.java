@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
+import nz.co.aj.expensemanager.exception.ResourceNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,14 +19,14 @@ public class TypeService
 	@Autowired
 	TypeRepository typeRepository;
 	
-	public TypeDTO getType( Long id )
+	public TypeDTO getType( Long id ) throws ResourceNotFoundException
 	{
 		Optional<Type> type = typeRepository.findById(id);
 		if( type.isPresent() )
 		{
 			return convertToDto( type.get() );
 		}
-		return null;
+		throw new ResourceNotFoundException("Type Not Found");
 	}
 	
 	public void addType( TypeDTO type )
