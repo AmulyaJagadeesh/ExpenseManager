@@ -17,6 +17,25 @@ public class ExpenseDTO
     private SubTypeDTO subType;
     private UserDTO user;
 
+    public ExpenseDTO(Long idexpense, String name, String description, Double amount, TypeDTO type, UserDTO user) {
+        this.idexpense = idexpense;
+        this.name = name;
+        this.description = description;
+        this.amount = amount;
+        this.type = type;
+        this.user = user;
+    }
+
+    public ExpenseDTO(Long idexpense, String name, String description, Double amount, TypeDTO type, SubTypeDTO subType, UserDTO user) {
+        this.idexpense = idexpense;
+        this.name = name;
+        this.description = description;
+        this.amount = amount;
+        this.type = type;
+        this.subType = subType;
+        this.user = user;
+    }
+
     public Long getIdexpense() {
         return idexpense;
     }

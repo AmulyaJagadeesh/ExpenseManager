@@ -51,8 +51,16 @@ public class Expense {
 	@ManyToOne
 	@JoinColumn(name = "user_iduser")
 	private User user;
-	
-	
+
+	public Expense(Long idexpense, String name, Double amount, Type type, User user)
+	{
+		this.idexpense = idexpense;
+		this.name = name;
+		this.amount = amount;
+		this.type = type;
+		this.user = user;
+	}
+
 	public Long getIdexpense() {
 		return idexpense;
 	}

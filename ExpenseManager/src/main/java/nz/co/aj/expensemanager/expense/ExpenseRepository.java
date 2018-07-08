@@ -10,4 +10,6 @@ public interface ExpenseRepository extends CrudRepository<Expense, Long> {
 	
 	public List<Expense> findByTypeIdtype(Long id);
 
+	public List<Expense> findByTypeIdtypeAndUserIduser(Long typeId, Long UserId);
+
 }

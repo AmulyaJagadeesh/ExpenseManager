@@ -23,6 +23,11 @@ public class User {
 		this.iduser = user.getIduser();
 	}
 
+	public User(Long iduser, String name) {
+		this.iduser = iduser;
+		this.name = name;
+	}
+
 	public User()
 	{
 		super();

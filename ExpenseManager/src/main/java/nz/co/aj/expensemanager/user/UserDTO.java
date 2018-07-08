@@ -7,6 +7,11 @@ public class UserDTO
     private String email;
     private String password;
 
+    public UserDTO(Long iduser, String name) {
+        this.iduser = iduser;
+        this.name = name;
+    }
+
     public Long getIduser() {
         return iduser;
     }

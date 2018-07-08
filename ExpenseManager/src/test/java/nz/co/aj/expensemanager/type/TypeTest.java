@@ -25,7 +25,6 @@ public class TypeTest {
 	@Test
 	public void testAllTypes()
 	{
-		
 		when(typeService.getAllTypes()).thenReturn(Arrays.asList(
 				new TypeDTO(1L, "Grocery", "bdsh" ),
 				new TypeDTO(2L, "ads", "bddffds fsh")
